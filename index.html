@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I'm Sorry, Krisha 💔</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      background: #0f0c29;
+      background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+      color: white;
+    }
+
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart-float {
+      position: absolute;
+      font-size: 20px;
+      animation: float-up 8s infinite ease-in;
+      opacity: 0;
+    }
+
+    @keyframes float-up {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    #opening {
+      text-align: center;
+    }
+
+    #opening h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 4em;
+      margin-bottom: 30px;
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 0 0 20px #ff6b9d, 0 0 30px #ff6b9d, 0 0 40px #ff6b9d;
+      }
+      50% {
+        text-shadow: 0 0 30px #ff6b9d, 0 0 50px #ff6b9d, 0 0 70px #ff6b9d;
+      }
+    }
+
+    .big-heart {
+      font-size: 8em;
+      animation: heartbeat 1.5s infinite;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .big-heart:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      10% { transform: scale(1.1); }
+      20% { transform: scale(1); }
+      30% { transform: scale(1.1); }
+      40% { transform: scale(1); }
+    }
+
+    .subtitle {
+      font-size: 1.5em;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 2s ease-in 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      font-size: 2em;
+      animation: bounce 2s infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    #letter {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .letter-container {
+      max-width: 700px;
+      background: white;
+      color: #333;
+      padding: 60px;
+      border-radius: 20px;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+      position: relative;
+      transform: perspective(1000px) rotateX(0deg);
+      transition: transform 0.6s;
+    }
+
+    .letter-container:hover {
+      transform: perspective(1000px) rotateX(2deg);
+    }
+
+    .letter-container::before {
+      content: '📝';
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 3em;
+    }
+
+    .letter-container h2 {
+      font-family: 'Pacifico', 'cursive';
+      color: #e74c3c;
+      font-size: 2.5em;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .letter-container p {
+      font-size: 1.1em;
+      line-height: 2;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .signature {
+      text-align: right;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5em;
+      margin-top: 40px;
+      color: #e74c3c;
+    }
+
+    #reasons {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin-top: 50px;
+    }
+
+    .reason-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .reason-card:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .reason-icon {
+      font-size: 3em;
+      margin-bottom: 15px;
+    }
+
+    .reason-card h3 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+    }
+
+    .reason-card p {
+      font-size: 0.95em;
+      opacity: 0.9;
+    }
+
+    #game {
+      background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .game-container {
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .game-container h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .game-container p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .choice-btn {
+      padding: 20px 40px;
+      font-size: 1.3em;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .yes-btn {
+      background: linear-gradient(45deg, #56ab2f, #a8e063);
+      color: white;
+    }
+
+    .yes-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 40px rgba(86, 171, 47, 0.5);
+    }
+
+    .no-btn {
+      background: linear-gradient(45deg, #e74c3c, #c0392b);
+      color: white;
+      position: absolute;
+    }
+
+    #promises {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .promises-container {
+      max-width: 800px;
+    }
+
+    .promise-item {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 25px;
+      border-radius: 15px;
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: all 0.3s;
+      opacity: 0;
+      transform: translateX(-50px);
+      animation: slideIn 0.6s forwards;
+    }
+
+    .promise-item:nth-child(1) { animation-delay: 0.2s; }
+    .promise-item:nth-child(2) { animation-delay: 0.4s; }
+    .promise-item:nth-child(3) { animation-delay: 0.6s; }
+    .promise-item:nth-child(4) { animation-delay: 0.8s; }
+    .promise-item:nth-child(5) { animation-delay: 1s; }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .promise-item:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateX(10px);
+    }
+
+    .promise-icon {
+      font-size: 2.5em;
+      min-width: 60px;
+    }
+
+    .promise-text {
+      font-size: 1.2em;
+    }
+
+    #final {
+      background: linear-gradient(to right, #ff6e7f, #bfe9ff);
+      text-align: center;
+    }
+
+    .final-container {
+      max-width: 700px;
+    }
+
+    .final-container h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3.5em;
+      margin-bottom: 30px;
+      animation: rainbow 3s infinite;
+    }
+
+    @keyframes rainbow {
+      0% { color: #ff6b6b; }
+      25% { color: #4ecdc4; }
+      50% { color: #45b7d1; }
+      75% { color: #f7b731; }
+      100% { color: #ff6b6b; }
+    }
+
+    .final-message {
+      font-size: 1.4em;
+      line-height: 2;
+      margin: 30px 0;
+    }
+
+    .forgive-btn {
+      padding: 25px 60px;
+      font-size: 1.5em;
+      background: linear-gradient(45deg, #ff6b9d, #c06c84);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 700;
+      margin-top: 30px;
+      box-shadow: 0 10px 40px rgba(255, 107, 157, 0.4);
+    }
+
+    .forgive-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 60px rgba(255, 107, 157, 0.6);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      color: #333;
+      padding: 60px;
+      border-radius: 30px;
+      text-align: center;
+      max-width: 600px;
+      animation: modalPop 0.5s ease-out;
+    }
+
+    @keyframes modalPop {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal-content h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3em;
+      color: #e74c3c;
+      margin-bottom: 20px;
+    }
+
+    .modal-content p {
+      font-size: 1.3em;
+      line-height: 1.8;
+    }
+
+    .celebration {
+      font-size: 5em;
+      margin: 20px 0;
+    }
+
+    /* Reconsider modal buttons styling */
+    .reconsider-btn {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .okay-btn {
+      background: linear-gradient(45deg, #28a745, #85e085); /* Green gradient */
+      color: white;
+    }
+
+    .okay-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4);
+    }
+
+    .reconsider-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px; /* spacing between Okay and No */
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Prevent global .no-btn from breaking modal layout */
+    .reconsider-btn.no-btn {
+      position: static; /* override absolute positioning */
+      background: linear-gradient(45deg, #e74c3c, #c0392b);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      #opening h1 {
+        font-size: 2.5em;
+      }
+
+      .big-heart {
+        font-size: 5em;
+      }
+
+      .letter-container {
+        padding: 40px;
+      }
+
+      .reason-card {
+        padding: 20px;
+      }
+
+      .memory-box {
+        padding: 15px;
+      }
+
+      .game-container h2 {
+        font-size: 2em;
+      }
+
+      .final-container h2 {
+        font-size: 2.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts-container">
+    <div class="heart-float">❤️</div>
+    <div class="heart-float">❤️</div>
+    <div class="heart-float">❤️</div>
+    <div class="heart-float">❤️</div>
+    <div class="heart-float">❤️</div>
+    <div class="heart-float">❤️</div>
+    <div class="heart-float">❤️</div>
+    <div class="heart-float">❤️</div>
+    <div class="heart-float">❤️</div>
+    <div class="heart-float">❤️</div>
+  </div>
+
+  <div class="container">
+    <section id="opening">
+      <h1>I'm Sorry, Krisha 💔</h1>
+      <div class="big-heart" onclick="scrollToSection('letter')">❤️</div>
+      <p class="subtitle">I messed up, and I know it. I'm truly sorry for hurting you.</p>
+      <p class="scroll-hint">Scroll down to read my apology 💔</p>
+    </section>
+
+    <section id="letter">
+      <div class="letter-container">
+        <h2>My Apology</h2>
+        <p>My love, I know I messed up. I've been thinking about what I did and how it hurt you. I never wanted to make you feel this way. I love you more than anything, and I'm so sorry for letting you down.</p>
+        <p>I know words can't make up for what I did, but I want you to know how deeply sorry I am. I promise to do better and make things right.</p>
+        <p>I miss you so much, and I hope you can find it in your heart to forgive me. I'll always be here for you, and I'll do everything I can to make you feel loved and appreciated again.</p>
+        <p class="signature">With all my love, <br> Your Karthik</p>
+      </div>
+    </section>
+
+    <section id="reasons">
+      <h2 style="text-align:center; font-size:2.5em; margin-bottom:30px;">Why I Messed Up</h2>
+      <div class="reasons-grid">
+        <div class="reason-card">
+          <div class="reason-icon">😢</div>
+          <h3>Impatience</h3>
+          <p>I let my emotions get the best of me and acted without thinking about how it would affect you.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">😩</div>
+          <h3>Stress</h3>
+          <p>I was overwhelmed with work and life, and I took it out on you instead of handling it properly.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">😤</div>
+          <h3>Anger</h3>
+          <p>I let my anger get the best of me and said things I didn't mean.</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-icon">😩</div>
+          <h3>Lack of Communication</h3>
+          <p>I didn't communicate my feelings properly, and I let things build up until it was too late.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="game">
+      <div class="game-container">
+        <h2>Will You Forgive Me?</h2>
+        <p>Click the button below to show your forgiveness. 🥺</p>
+        <div class="button-container">
+          <button class="choice-btn yes-btn" onclick="showForgiveness()">Yes, I forgive you 💕</button>
+          <button class="choice-btn no-btn" onclick="showForgiveness()">No, I do not forgive you 😢</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="promises">
+      <div class="promises-container">
+        <h2 style="text-align:center; font-size:2.5em; margin-bottom:30px;">My Promises</h2>
+        <div class="promise-item">
+          <div class="promise-icon">✅</div>
+          <div class="promise-text">I promise to communicate better and listen to you more.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">✅</div>
+          <div class="promise-text">I promise to be more patient and not take out my stress on you.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">✅</div>
+          <div class="promise-text">I promise to make up for my mistakes and do better.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">✅</div>
+          <div class="promise-text">I promise to always be there for you, no matter what.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">✅</div>
+          <div class="promise-text">I promise to show you how much I love you every day.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="final">
+      <div class="final-container">
+        <h2>Thank You for Reading My Apology 💕</h2>
+        <p class="final-message">I hope you can find it in your heart to forgive me. I love you more than anything, and I'll always be here for you. I promise to make things right and make you feel loved again.</p>
+        <button class="forgive-btn" onclick="showModal()">Forgive Me, Please 💔</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>Thank You for Forgiving Me 💕</h2>
+      <p class="celebration">🎉</p>
+      <p>I love you so much, and I promise to make things up to you. I'll always be here for you, and I'll do everything I can to make you feel loved and appreciated again.</p>
+      <img src="https://i.imgur.com/d5X6x6e.png" alt="Thank You">
+    </div>
+  </div>
+
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    }
+
+    function showForgiveness() {
+      const modal = document.getElementById('modal');
+      const modalContent = document.querySelector('.modal-content');
+
+      if (document.querySelector('.yes-btn').classList.contains('active')) {
+        modalContent.innerHTML = `
+          <h2>Thank You for Forgiving Me 💕</h2>
+          <p class="celebration">🎉</p>
+          <p>I love you so much, and I promise to make things up to you. I'll always be here for you, and I'll do everything I can to make you feel loved and appreciated again.</p>
+          <img src="https://i.imgur.com/d5X6x6e.png" alt="Thank You">
+        `;
+      } else {
+        modalContent.innerHTML = `
+          <h2>Please reconsider 🥺</h2>
+          <p>I understand you're hurting, but I truly want to make things right.</p>
+          <div class="reconsider-buttons">
+            <button class="reconsider-btn okay-btn" onclick="handleReconsider('okay')">Okay</button>
+            <button class="reconsider-btn no-btn" onclick="handleReconsider('no')">No</button>
+          </div>
+        `;
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    function handleReconsider(choice) {
+      const modal = document.getElementById('modal');
+      const modalContent = document.querySelector('.modal-content');
+
+      if (choice === 'okay') {
+        modal.style.display = 'none';
+      } else {
+        const reconsiderMessages = [
+          "Please, give me another chance. I'll do everything I can to earn your forgiveness.",
+          "I know I messed up, but I'm committed to changing. Please reconsider.",
+          "My love for you is unwavering. I hope you'll reconsider giving me another chance.",
+          "I'm truly sorry for the pain I've caused. Please reconsider and let me make it up to you."
+        ];
+
+        const randomMessage = reconsiderMessages[Math.floor(Math.random() * reconsiderMessages.length)];
+
+        modalContent.innerHTML = `
+          <h2>Please reconsider 🥺</h2>
+          <p>${randomMessage}</p>
+          <div class="reconsider-buttons">
+            <button class="reconsider-btn okay-btn" onclick="handleReconsider('okay')">Okay</button>
+            <button class="reconsider-btn no-btn" onclick="handleReconsider('no')">No</button>
+          </div>
+        `;
+      }
+    }
+
+    function showModal() {
+      document.getElementById('modal').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>
